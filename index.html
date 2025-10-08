@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Note Sharing</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    .header {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 1rem 0;
+      color: white;
+      text-align: center;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+    .btn-primary {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border: none;
+      border-radius: 25px;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1><i class="fas fa-book-open me-2"></i>Student Note Sharing</h1>
+    <p>Share, Learn, and Collaborate!</p>
+  </header>
+
+  <!-- Login Section -->
+  <div id="loginSection" class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card p-4">
+          <h3 class="mb-4 text-center">Login</h3>
+          <form id="loginForm">
+            <div class="mb-3">
+              <label>Username</label>
+              <input type="text" id="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label>Password</label>
+              <input type="password" id="password" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label>Role</label>
+              <select id="role" class="form-select" required>
+                <option value="">Select Role</option>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+          </form>
+          <small class="mt-2 d-block">Demo: student/pass123 | teacher/admin123</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Section -->
+  <div id="dashboard" class="container mt-5 hidden">
+    <div class="d-flex justify-content-between mb-3">
+      <h2 id="welcomeMsg"></h2>
+      <button class="btn btn-secondary" id="logoutBtn"><i class="fas fa-sign-out-alt me-1"></i>Logout</button>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mb-4" id="dashboardTabs">
+      <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#notes">Notes</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#projects">Projects</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <!-- Notes Section -->
+      <div class="tab-pane fade show active" id="notes">
+        <div class="card p-3">
+          <h4>Notes Sharing</h4>
+
+          <div id="uploadNotesForm" class="mb-4 hidden">
+            <h5>Upload Notes</h5>
+            <form id="notesUploadForm">
+              <div class="row">
+                <div class="col-md-3">
+                  <label>Year</label>
+                  <select id="year" class="form-select" required>
+                    <option value="">Select Year</option>
+                    <option>First Year</option>
+                    <option>Second Year</option>
+                    <option>Third Year</option>
+                    <option>Final Year</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label>Course</label>
+                  <select id="course" class="form-select" required>
+                    <option value="">Select Course</option>
+                    <option>BSc CS</option>
+                    <option>BSc IT</option>
+                    <option>BSc Plain (PCB)</option>
+                    <option>BSc Plain (PCM)</option>
+                    <option>BBI</option>
+                    <option>BA</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label>Title</label>
+                  <input type="text" id="noteTitle" class="form-control" required>
+                </div>
+                <div class="col-md-2">
+                  <label>&nbsp;</label>
+                  <input type="file" id="noteFile" class="form-control" required>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary mt-2">Upload Note</button>
+            </form>
+          </div>
+
+          <div id="notesList"><h5>Available Notes</h5><div id="notesContainer"></div></div>
+        </div>
+      </div>
+
+      <!-- Projects Section -->
+      <div class="tab-pane fade" id="projects">
+        <div class="card p-3">
+          <h4>Project Submissions</h4>
+
+          <div id="uploadProjectForm" class="mb-4 hidden">
+            <h5>Submit Project</h5>
+            <form id="projectUploadForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Project Title</label>
+                  <input type="text" id="projectTitle" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <label>Subject</label>
+                  <input type="text" id="projectSubject" class="form-control" required>
+                </div>
+              </div>
+              <div class="mt-2">
+                <input type="file" id="projectFile" class="form-control mb-2" required>
+                <textarea id="projectDesc" class="form-control mb-2" rows="3" placeholder="Description" required></textarea>
+                <button type="submit" class="btn btn-primary">Submit Project</button>
+              </div>
+            </form>
+          </div>
+
+          <div id="projectsList"><div id="projectsContainer"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="style.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
