@@ -24,11 +24,16 @@ Open index.html in a browser.
 Use the demo credentials to login:
 
 Student:
+
 Username: student
+
 Password: pass123
 
+
 Teacher:
+
 Username: teacher
+
 Password: admin123
 
 Explore features for uploading notes, submitting projects, and reviewing assignments.---
